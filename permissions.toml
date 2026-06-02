@@ -1,0 +1,9 @@
+[bash]
+allow = [
+    "cargo *",
+]
+
+[webfetch]
+allow = [
+    "*",
+]
