@@ -1,6 +1,6 @@
 [mcp.ast-grep]
 command = ["bash", "/home/tony/.config/maki/ast-grep-mcp.sh"]
-enabled = true
+enabled = false
 
 [mcp.taint]
 command = ["bash", "/home/tony/.config/maki/taint-mcp.sh"]
