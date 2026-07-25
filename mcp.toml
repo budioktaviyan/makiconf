@@ -5,3 +5,7 @@ enabled = false
 [mcp.taint]
 command = ["bash", "/home/tony/.config/maki/taint-mcp.sh"]
 enabled = false
+
+[mcp.playwright]
+command = ["npx", "-y", "@playwright/mcp@latest", "--browser", "firefox", "--isolated"]
+enabled = true
