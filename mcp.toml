@@ -1,11 +1,42 @@
 [mcp.ast-grep]
-command = ["bash", "/home/tony/.config/maki/ast-grep-mcp.sh"]
-enabled = false
-
-[mcp.taint]
-command = ["bash", "/home/tony/.config/maki/taint-mcp.sh"]
-enabled = false
+command = [
+    "bash",
+    "/Users/budioktaviyan/.config/maki/ast-grep-mcp.sh"
+]
+enabled = true
 
 [mcp.playwright]
-command = ["npx", "-y", "@playwright/mcp@latest", "--browser", "firefox", "--isolated"]
+command = [
+    "npx", "-y", "@playwright/mcp@latest",
+    "--browser", "chromium", "--isolated"
+]
+enabled = true
+
+[mcp.taint]
+command = [
+    "bash",
+    "/Users/budioktaviyan/.config/maki/taint-mcp.sh"
+]
+enabled = true
+
+[mcp.aws-developer-knowledge]
+url = "https://knowledge-mcp.global.api.aws"
+enabled = true
+
+[mcp.google-developer-knowledge]
+command = [
+    "bash", "-c",
+    "exec npx -y mcp-remote https://developerknowledge.googleapis.com/mcp --header \"X-Goog-Api-Key:${DOE_AGENTIC_KEY}\" --transport http-only"
+]
+enabled = true
+
+[mcp.clickup]
+url = "https://mcp.clickup.com/mcp"
+enabled = true
+
+[mcp.context7]
+command = [
+    "npx", "-y", "@upstash/context7-mcp@latest",
+    "--api-key", "ctx7sk-c7d35ba4-9ddb-44a9-90eb-2a1041d14ccf"
+]
 enabled = true

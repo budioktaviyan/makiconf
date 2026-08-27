@@ -47,7 +47,7 @@ handle_prompts_get() {
 
   if [ "$name" != "refactor" ]; then
     local err_resp
-    err_resp=$(jq -n --argjson id "$id" '{jsonrpc:"2.0",id:$id,error:{code:-32602,message:"Unknown prompt"}}')
+    err_resp=$(jq -nc --argjson id "$id" '{jsonrpc:"2.0",id:$id,error:{code:-32602,message:"Unknown prompt"}}')
     send_response "$err_resp"
     return
   fi
@@ -59,7 +59,7 @@ handle_prompts_get() {
   local text="You have access to an ast-grep search_and_replace tool. Use it to: ${description}\n\nThe source language is ${language}. Use ast-grep pattern syntax with \$NAME for single-node wildcards and \$\$\$NAME for multi-node wildcards.\n\nSearch first to verify matches, then apply the replacement."
 
   local resp
-  resp=$(jq -n --argjson id "$id" --arg text "$text" '{jsonrpc:"2.0",id:$id,result:{messages:[{role:"user",content:{type:"text",text:$text}}]}}')
+  resp=$(jq -nc --argjson id "$id" --arg text "$text" '{jsonrpc:"2.0",id:$id,result:{messages:[{role:"user",content:{type:"text",text:$text}}]}}')
   send_response "$resp"
 }
 
@@ -75,7 +75,7 @@ handle_tool_call() {
 
   if [ -z "$pattern" ] || [ -z "$language" ]; then
     local err_resp
-    err_resp=$(jq -n --argjson id "$id" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:"Error: pattern and language are required."}],isError:true}}')
+    err_resp=$(jq -nc --argjson id "$id" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:"Error: pattern and language are required."}],isError:true}}')
     send_response "$err_resp"
     return
   fi
@@ -90,7 +90,7 @@ handle_tool_call() {
   if [ "$method_name" = "search_and_replace" ]; then
     if [ -z "$rewrite" ]; then
       local err_resp
-      err_resp=$(jq -n --argjson id "$id" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:"Error: rewrite is required for search_and_replace."}],isError:true}}')
+      err_resp=$(jq -nc --argjson id "$id" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:"Error: rewrite is required for search_and_replace."}],isError:true}}')
       send_response "$err_resp"
       return
     fi
@@ -145,7 +145,7 @@ handle_tool_call() {
   fi
 
   local resp
-  resp=$(jq -n --argjson id "$id" --arg text "$result_text" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:$text}],isError:false}}')
+  resp=$(jq -nc --argjson id "$id" --arg text "$result_text" '{jsonrpc:"2.0",id:$id,result:{content:[{type:"text",text:$text}],isError:false}}')
   send_response "$resp"
 }
 
@@ -187,7 +187,7 @@ while IFS= read -r line; do
       ;;
     *)
       if [ -n "$id" ]; then
-        err_resp=$(jq -n --argjson id "$id" '{jsonrpc:"2.0",id:$id,error:{code:-32601,message:"Method not found"}}')
+        err_resp=$(jq -nc --argjson id "$id" '{jsonrpc:"2.0",id:$id,error:{code:-32601,message:"Method not found"}}')
         send_response "$err_resp"
       fi
       ;;
