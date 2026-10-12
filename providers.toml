@@ -1,0 +1,13 @@
+[9router]
+display_name = "Custom (9router)"
+protocol = "openai"
+base_url = "https://9router.superep.online/v1"
+api_key_env = "9ROUTER_API_KEY"
+discover_models = true
+
+[omniroute]
+display_name = "Custom (omniroute)"
+protocol = "openai"
+base_url = "https://omniroute.superep.online/v1"
+api_key_env = "OMNIROUTE_API_KEY"
+discover_models = true
